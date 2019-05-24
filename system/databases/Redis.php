@@ -10,11 +10,11 @@ namespace System\Databases;
 
 class Redis
 {
-    private static $redis;
+    protected $redis;
 
-    public static function init ()
+    public  function init ()
     {
-        if (empty(self::$redis))
+        if (empty($this->redis))
         {
             global $config;
 
@@ -30,7 +30,7 @@ class Redis
                 $conn = $db->connect($config['redis']['host'], $config['redis']['port']);
                 if ($conn)
                 {
-                    self::$redis = $conn;
+                    $this->redis = $conn;
                 } else {
                     header('HTTP/1.1 500 Service Unavailable.', TRUE, 500);
                     echo 'redis conn exception ' . pathinfo(__FILE__, PATHINFO_BASENAME);
@@ -44,7 +44,7 @@ class Redis
             }
         }
 
-        return self::$redis;
+        return $this->redis;
     }
 
 }

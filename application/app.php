@@ -11,6 +11,8 @@ namespace Application;
 class App
 {
     private static $_init;
+    protected static $redis;
+    protected static $mongo;
 
     private function __construct ()
     {
@@ -26,6 +28,10 @@ class App
     {
         if (empty(self::$_init))
         {
+            $db = new \System\Databases\DB();
+            self::$redis = $db->conn(new \System\Databases\Redis());
+            self::$mongo = $db->conn(new \System\Databases\Mongo());
+
             self::$_init = new self();
         }
 

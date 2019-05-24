@@ -11,11 +11,11 @@ namespace System\Databases;
 
 class Mongo
 {
-    private static $mongo;
+    protected $mongo;
 
-    public static function init ()
+    public  function init ()
     {
-        if (empty(self::$mongo))
+        if (empty($this->mongo))
         {
             global $config;
 
@@ -30,7 +30,7 @@ class Mongo
                 $conn = new \MongoDB\Driver\Manager("mongodb://{$config['mongo']['host']}:{$config['mongo']['port']}");
                 if ($conn)
                 {
-                    self::$mongo = $conn;
+                    $this->mongo = $conn;
                 } else {
                     header('HTTP/1.1 500 Service Unavailable.', TRUE, 500);
                     echo 'redis conn exception ' . pathinfo(__FILE__, PATHINFO_BASENAME);
@@ -44,6 +44,6 @@ class Mongo
             }
         }
 
-        return self::$mongo;
+        return $this->mongo;
     }
 }

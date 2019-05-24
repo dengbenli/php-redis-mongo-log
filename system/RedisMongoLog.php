@@ -18,21 +18,24 @@ require_once(CONFIG_FILE . '');
 require_once(SYSTEM_PATH . DIRECTORY_SEPARATOR . 'common.php');
 
 /**
- * 加载应用程序文件
+ * 加载 DB
  */
-require_once(APP_PATH . DIRECTORY_SEPARATOR . 'app.php');
+require_once(SYSTEM_PATH . DIRECTORY_SEPARATOR . 'databases' . DIRECTORY_SEPARATOR . 'DB.php');
 
 /**
  * 加载 Redis
  */
 require_once(SYSTEM_PATH . DIRECTORY_SEPARATOR . 'databases' . DIRECTORY_SEPARATOR . 'Redis.php');
-\System\Databases\Redis::init();
 
 /**
  * 加载 Mongo
  */
 require_once(SYSTEM_PATH . DIRECTORY_SEPARATOR . 'databases' . DIRECTORY_SEPARATOR . 'Mongo.php');
-\System\Databases\Mongo::init();
+
+/**
+ * 加载应用程序文件
+ */
+require_once(APP_PATH . DIRECTORY_SEPARATOR . 'app.php');
 
 while (true)
 {
